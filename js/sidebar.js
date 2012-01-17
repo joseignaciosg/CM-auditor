@@ -24,4 +24,16 @@ $(document).ready(function() {
 		$("#content h2").html("Rebotes Soft del &uacute;ltimo env&iacute;o");
 	}); 
 	
+	//show active delivery list
+	$("#sendlist").click(function(){
+		$("#contentmain").load("php/showactivelist.php");
+		$("#content h2").html("Lista activa de env&iacute;o");
+	}); 
+	
+	//show hard and soft graph
+	$("#hardsoftgraph").click(function(){
+		$("#contentmain").load("php/hardsoftgraph.php");
+		$("#content h2").html("Hard and Soft");
+	});
+	
 });
