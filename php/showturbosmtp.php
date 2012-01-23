@@ -4,8 +4,12 @@
 $dbhost = 'localhost';
 $dbuser = 'jose';
 $dbpass = 'whiteflag';
+// $dbuser = 'category';
+// $dbpass = '4975_pirata_MORGAN';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass) or die('Error connecting to mysql');
-$dbname = 'auditory_system'; // I select the correct database
+$dbname = 'auditory_system'; 
+// $dbname = 'category_auditory_system';
+
 mysql_select_db($dbname);
 
 $sqltxt = "SELECT recipient, status,error

@@ -3,8 +3,11 @@
 $dbhost = 'localhost';
 $dbuser = 'jose';
 $dbpass = 'whiteflag';
+// $dbuser = 'category';
+// $dbpass = '4975_pirata_MORGAN';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass) or die('Error connecting to mysql');
-$dbname = 'auditory_system'; // I select the correct database
+$dbname = 'auditory_system';
+// $dbname = 'category_auditory_system';
 mysql_select_db($dbname);
 
 $sqltxt = "SELECT recipient ,name, status,hard, soft, suscribed
@@ -28,14 +31,14 @@ $count=0;
 
 
 echo "<table border=\"1\">";
-echo "<tr><th> E-Mail </th><th>Nombre</th><th>Status</th><th>Hard</th><th>Soft</th><th>Suscribed</th></tr>";
+echo "<tr><th></th><th> E-Mail </th><th>Nombre</th><th>Status</th><th>Hard</th><th>Soft</th><th>Suscribed</th></tr>";
 while( $count < $i ){
 	if ( $count % 2 == 0){
 		echo "<tr id=\"$id[$count]\">";
 	}else{
 		echo "<tr class=\"alt\"  id=\"$id[$count]\">";
 	}
-	echo "<td>" . $recipients[$count] . "</td><td>" .  $names[$count] . "</td><td>" . $status[$count] . "</td><td>". $hards[$count] .
+	echo "<td>$count - </td><td>" . $recipients[$count] . "</td><td>" .  $names[$count] . "</td><td>" . $status[$count] . "</td><td>". $hards[$count] .
 	"</td><td>" . $softs[$count] . "</td><td>" . $suscribed[$count]  ."</td>";
 	echo "<tr>";
 	$count++;

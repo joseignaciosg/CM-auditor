@@ -36,4 +36,10 @@ $(document).ready(function() {
 		$("#content h2").html("Hard and Soft");
 	});
 	
+	//show bad imported into send blaster
+	$("#badimported").click(function(){
+		$("#contentmain").load("php/showsendblasterbadimported.php");
+		$("#content h2").html("Cargados mal en sistema de env&iacute;o");
+	});
+	
 });

@@ -1,5 +1,6 @@
 <?php
 
+
 $dbhost = 'localhost';
 $dbuser = 'jose';
 $dbpass = 'whiteflag';
@@ -11,37 +12,39 @@ $dbname = 'auditory_system';
 
 mysql_select_db($dbname);
 
-$sqltxt = "SELECT recipient, status,error
-			from hard";
+$query = "select recipient, name
+from active 
+where recipient not in (
+select recipient 
+from sendblasterexport )";
 
-$ans = mysql_query($sqltxt, $conn);
+
+$ans = mysql_query($query, $conn);
 $i=0;
 
 
 while ( $fila = mysql_fetch_array($ans) ){
 	$recipients[$i] = $fila[0];
-	$status[$i] = $fila[1];
-	$errors[$i] = $fila[2];/*converting from mysql to php time*/
+	$names[$i] = $fila[1];
 	$i++;
 }
 $count=0;
 
 
 echo "<table border=\"1\">";
-echo "<tr><th> E-Mail </th><th>Status</th><th>Error</th></tr>";
+echo "<tr><th> E-Mail </th><th> Nombre </th></tr>";
 while( $count < $i ){
 	if ( $count % 2 == 0){
 		echo "<tr id=\"$id[$count]\">";
 	}else{
 		echo "<tr class=\"alt\"  id=\"$id[$count]\">";
 	}
-	echo "<td>" . $recipients[$count] . "</td><td>" . $status[$count] . "</td><td>".$errors[$count]
+	echo "<td>" . $recipients[$count] . "</td><td>" .$names[$count]
 	."</td>";
 	echo "<tr>";
 	$count++;
 }
 echo "</table>";
-
 
 
 ?>
