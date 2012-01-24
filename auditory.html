@@ -1,0 +1,23 @@
+<html>
+<head>
+<script>
+$(document).ready(function(){
+	$("#date").load("php/showlastlogdate.php");
+	//$("#date").html("peron");
+	$("#test").live("click",function(){
+			$("#content h2").html("Auditor&iacute;a ejecutada");
+			$("#contentmain").load("php/exeauditory.php");
+	});	
+});
+
+</script>
+
+</head>
+<body>
+<div>The last log date is: <div id="date"></div></div>
+<br/>
+<button id="test" >test</button>
+
+
+</body>
+</html>

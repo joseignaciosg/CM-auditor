@@ -6,10 +6,22 @@ $dbuser = 'jose';
 $dbpass = 'whiteflag';
 // $dbuser = 'category';
 // $dbpass = '4975_pirata_MORGAN';
+
+
 $conn = mysql_connect($dbhost, $dbuser, $dbpass) or die('Error connecting to mysql');
 $dbname = 'auditory_system';
 // $dbname = 'category_auditory_system';
 mysql_select_db($dbname);
+
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+
+//first stores the auditory in the log
+$mysqldate = date( 'Y-m-d H:i:s');
+$logquery = "insert into log  values('','$mysqldate')";
+$ans = mysql_query($logquery, $conn);
+if (!$ans){
+	echo "<br/>Invalid query:  " . mysql_error();
+}
 
 $querysoft = 'insert into soft select recipient, status, error
 			from turbosmtp 
@@ -116,7 +128,8 @@ $aux=1;
 while ( $row = mysql_fetch_array($ans1) ){
 	$ans2 = mysql_query($query2 . "'%$row[1]%'", $conn);
 	$isthere = mysql_num_rows($ans2);
-	if ($isthere != 0){//is there
+	if ($isthere != 0){
+		//is there
 		$tuple = mysql_fetch_array($ans2);
 		if ( $row[3] == "FAIL" ){
 			//decides whether is hard or soft
@@ -143,11 +156,11 @@ while ( $row = mysql_fetch_array($ans1) ){
 					mysql_query("update active set hard=$hardprev where recipient like '%$row[1]%'");
 				}
 			}
-			
+				
 		}
-// 		echo $aux;
-// 		$aux++;
-// 		echo "<br/>$row[3]";
+		// 		echo $aux;
+		// 		$aux++;
+		// 		echo "<br/>$row[3]";
 	}else{//is not there
 		//adds it only if is a success
 		if ( $row[3] == "SUCCESS"){

@@ -3,7 +3,8 @@ $(document).ready(function() {
 	//executes auditory
 	$("#exeauditory").click(function(){
 		$("#content h2").html("Ejecutando Auditor&iacute;a");
-		$("#contentmain").load("php/exeauditory.php");
+//		$("#contentmain").load("php/exeauditory.php");
+		$("#contentmain").load("auditory.html");
 	});
 	
 	//shows turbo smtp data of current delivery
