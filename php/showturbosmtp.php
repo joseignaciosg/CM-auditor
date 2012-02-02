@@ -1,14 +1,13 @@
 <?php
 
 
+include 'strings.php';
+
 $dbhost = 'localhost';
-$dbuser = 'jose';
-$dbpass = 'whiteflag';
-// $dbuser = 'category';
-// $dbpass = '4975_pirata_MORGAN';
+$dbuser = $global_dbuser;
+$dbpass = $global_dbpass;
+$dbname = $global_dbname;
 $conn = mysql_connect($dbhost, $dbuser, $dbpass) or die('Error connecting to mysql');
-$dbname = 'auditory_system'; 
-// $dbname = 'category_auditory_system';
 
 mysql_select_db($dbname);
 
