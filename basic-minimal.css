@@ -43,3 +43,11 @@ hr.clear {visibility:hidden;clear:both;}
 #footer p {margin:0; padding:0;}
 #footer a {color:#777;}
 
+/*mine for loader*/
+#loader {
+	position: relative;
+	top: 200px;
+	left: 450px;
+}
+
+

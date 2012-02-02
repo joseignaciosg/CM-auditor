@@ -151,6 +151,8 @@ while ( $row = mysql_fetch_array($ans1) ){
 				mysql_query("update active set hard=$hardprev where recipient like '%$row[1]%'");
 				mysql_query("update active set status='HARD' where recipient like '%$row[1]%'");
 			}
+			
+			
 				
 		}else{//success
 			mysql_query("update active set status='SUCCESS' where recipient like '%$row[1]%'");

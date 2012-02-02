@@ -1,21 +1,30 @@
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="basic-minimal.css"
+	title="Basic Minimal" media="all">
 <script>
-$(document).ready(function(){
-	$("#date").load("php/showlastlogdate.php");
-	
-	$("#test").click(function(){
-		$("#content h2").html("Auditor&iacute;a ejecutada");
-		$("#contentmain").load("php/exeauditory.php");
-	});
-});
+	$(document).ready(
+			function() {
+				$("#date").load("php/showlastlogdate.php");
 
+				$("#test").click(
+						function() {
+							$("#content h2").html("Auditor&iacute;a ejecutada");
+							$("#contentmain").empty().html(
+									'<img id="loader" src="images/loader.gif" alt="" />');
+							$("#contentmain").load("php/exeauditory.php");
+
+						});
+			});
 </script>
 
 </head>
 <body>
-<div>La fecha de la &uacute;ltima auditor&iacute;a realizada es: <div id="date"></div></div>
-<button id="test" >Ejecutar auditoria</button>
+	<div>
+		La fecha de la &uacute;ltima auditor&iacute;a realizada es:
+		<div id="date"></div>
+	</div>
+	<button id="test">Ejecutar auditoria</button>
 
 
 </body>
