@@ -135,23 +135,25 @@ while ( $row = mysql_fetch_array($ans1) ){
 			if ( $softcount != 0 ){
 				echo "<br/>" . $row[3] . " soft" . " /softs in active : " . ($tuple[7] );
 				$softprev = $tuple[7] +1 ;
-				if ( $softprev > 5 ){
+				if ( $softprev >= 5 ){
 					//need to unsuscribe
 					mysql_query("update active set suscribed=0 where recipient like '%$row[1]%'");
-				}else{
-					mysql_query("update active set soft=$softprev where recipient like '%$row[1]%'");
 				}
+				mysql_query("update active set soft=$softprev where recipient like '%$row[1]%'");
+				mysql_query("update active set status='SOFT' where recipient like '%$row[1]%'");
 			}else if ( $hardcount != 0){
 				echo "<br/>" . $row[3] . " hard" . " /hards in active : " . ($tuple[6]);
 				$hardprev = $tuple[6] +1 ;
-				if ( $hardprev > 3 ){
+				if ( $hardprev >= 3 ){
 					//need to unsuscribe
 					mysql_query("update active set suscribed=0 where recipient like '%$row[1]%'");
-				}else{
-					mysql_query("update active set hard=$hardprev where recipient like '%$row[1]%'");
 				}
+				mysql_query("update active set hard=$hardprev where recipient like '%$row[1]%'");
+				mysql_query("update active set status='HARD' where recipient like '%$row[1]%'");
 			}
 				
+		}else{//success
+			mysql_query("update active set status='SUCCESS' where recipient like '%$row[1]%'");
 		}
 		// 		echo $aux;
 		// 		$aux++;

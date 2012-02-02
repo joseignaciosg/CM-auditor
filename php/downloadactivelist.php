@@ -19,7 +19,8 @@ include 'strings.php';
 	mysql_select_db($dbname);
 	$fp = fopen('activelist.csv','w');
 	
-	$sqltxt = "SELECT recipient,name from active";
+	//downloads the mail only if if it is suscribed
+	$sqltxt = "SELECT recipient,name from active where suscribed = 1";
 	$ans = mysql_query($sqltxt, $conn);
 	
 	$query = mysql_query($sqltxt);

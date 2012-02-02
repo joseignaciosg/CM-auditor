@@ -22,13 +22,11 @@ if (!$ans){
 	echo "<br/>Invalid query:  " . mysql_error();
 }
 
-$i=0;
-while ( $fila = mysql_fetch_array($ans2) ){
-	$date[$i] = $fila[0];
-	$i++;
-}
 
-echo date("H:i:s",$date[0]);
+$fila = mysql_fetch_array($ans2);
+$date[0] = strtotime($fila[0]);
+echo "Dia: " . date("d/m/y",$date[0]); 
+echo "<br>Fecha: " . date("H:i:s",$date[0]);
 
 
 
