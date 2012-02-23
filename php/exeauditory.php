@@ -21,7 +21,7 @@ if (!$ans){
 $querysoft = 'insert into soft select recipient, status, error
 			from turbosmtp 
 			where status like "%FAIL%"
-			and error like "%Recipient%address%rejected:%Access%Denied"
+			and (error like "%Recipient%address%rejected:%Access%Denied"
 			or error like "%Server%access%forbidden%by%your%IP%"
 			or error like "%no mailbox by that name is currently available%"
 			or error like "%Mailbox size limit exceeded%"
@@ -34,12 +34,12 @@ $querysoft = 'insert into soft select recipient, status, error
 			or error like "%connection died%"
 			or error like "%Service Unavailable%"
 			or error like "%Mail could not be processed%"
-			or error like "%Mailbox disabled%"';
+			or error like "%Mailbox disabled%")';
 
 $queryhard = 'insert into hard select recipient, status, error
 			from turbosmtp 
 			where status like "%FAIL%"
-			and error like "%The email account that you tried to reach does not exist%"
+			and (error like "%The email account that you tried to reach does not exist%"
 			or error like "%Recipient address rejected: User unknown%"
 			or error like "%Unable to relay for%"
 			or error like "%relay not permitted%"
@@ -67,7 +67,7 @@ $queryhard = 'insert into hard select recipient, status, error
 			or error like "%was not found%"
 			or error like "%invalid mailbox%"
 			or error like "%does not exist%"
-			or error like "%Relay access denied%"';
+			or error like "%Relay access denied%")';
 
 $sqlcheck1 = "select recipient from hard";
 $sqlcheck2 = "select recipient from soft";
