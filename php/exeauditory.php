@@ -129,9 +129,7 @@ while ( $row = mysql_fetch_array($ans1) ){
 		if ( $row[3] == "FAIL" ){
 			//decides whether is hard or soft
 			$ans3 = mysql_query("select * from soft where recipient like '%$row[1]%'",$conn);
-			$ans4 = mysql_query("select * from hard where recipient like '%$row[1]%'",$conn);
 			$softcount = mysql_num_rows($ans3);
-			$hardcount = mysql_num_rows($ans4);
 			if ( $softcount != 0 ){
 				echo "<br/>" . $row[3] . " soft" . " /softs in active : " . ($tuple[7] );
 				$softprev = $tuple[7] +1 ;
@@ -139,21 +137,18 @@ while ( $row = mysql_fetch_array($ans1) ){
 					//need to unsuscribe
 					mysql_query("update active set suscribed=0 where recipient like '%$row[1]%'");
 				}
-				mysql_query("update active set soft=$softprev where recipient like '%$row[1]%'");
-				mysql_query("update active set status='SOFT' where recipient like '%$row[1]%'");
-			}else if ( $hardcount != 0){
+				mysql_query("update active set soft=$softprev,status='SOFT' where recipient like '%$row[1]%'");
+			}else {
+				$ans4 = mysql_query("select * from hard where recipient like '%$row[1]%'",$conn);
+				$hardcount = mysql_num_rows($ans4);
 				echo "<br/>" . $row[3] . " hard" . " /hards in active : " . ($tuple[6]);
 				$hardprev = $tuple[6] +1 ;
 				if ( $hardprev >= 3 ){
 					//need to unsuscribe
 					mysql_query("update active set suscribed=0 where recipient like '%$row[1]%'");
 				}
-				mysql_query("update active set hard=$hardprev where recipient like '%$row[1]%'");
-				mysql_query("update active set status='HARD' where recipient like '%$row[1]%'");
+				mysql_query("update active set hard=$hardprev,status='HARD' where recipient like '%$row[1]%'");
 			}
-			
-			
-				
 		}else{//success
 			mysql_query("update active set status='SUCCESS' where recipient like '%$row[1]%'");
 		}
